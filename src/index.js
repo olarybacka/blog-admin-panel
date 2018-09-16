@@ -4,10 +4,10 @@ import "./index.css"
 import App from "./App"
 import registerServiceWorker from "./registerServiceWorker"
 import store from "./store"
-// import {bindActionCreators} from 'redux'
-import { updateCurrent } from "./reducers/post"
+import { updateCurrent, addPost } from "./reducers/post"
 
 const postChangeHandler = val => store.dispatch(updateCurrent(val))
+const addPost2 = val => store.dispatch(addPost(val))
 
 const render = () => {
   const state = store.getState()
@@ -16,6 +16,7 @@ const render = () => {
       posts={state.posts}
       currentPost={state.currentPost}
       postChangeHandler={postChangeHandler}
+      addPost2={addPost2}
     />,
     document.getElementById("root")
   )
