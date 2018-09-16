@@ -10,8 +10,7 @@ class App extends Component {
       currentTitle,
       updateTitle,
       updateContent,
-      handleSubmit,
-      addPost2
+      addPost
     } = this.props
     return (
       <div className="App">
@@ -20,8 +19,7 @@ class App extends Component {
           currentTitle={currentTitle}
           updateTitle={updateTitle}
           updateContent={updateContent}
-          handleSubmit={handleSubmit}
-          addPost={addPost2}
+          addPost={addPost}
         />
         <PostList posts={posts} />
       </div>

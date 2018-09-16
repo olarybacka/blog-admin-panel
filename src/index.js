@@ -7,15 +7,12 @@ import registerServiceWorker from "./registerServiceWorker"
 import store from "./store"
 import { updateContent, updateTitle, addPost } from "./reducers/post"
 
-const addPost2 = val => store.dispatch(addPost(val))
-
 const actions = bindActionCreators(
-  { updateContent, updateTitle },
+  { updateContent, updateTitle, addPost },
   store.dispatch
 )
 
 const render = () => {
-  console.log("updateTitle", actions)
   const state = store.getState()
   ReactDOM.render(
     <App
@@ -24,7 +21,7 @@ const render = () => {
       currentContent={state.currentContent}
       updateTitle={actions.updateTitle}
       updateContent={actions.updateContent}
-      addPost2={addPost2}
+      addPost={actions.addPost}
     />,
     document.getElementById("root")
   )
