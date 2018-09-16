@@ -1,20 +1,43 @@
 import React from "react"
-import './form.css'
+import "./styles/form.css"
 
-export default ({ currentPost, postChangeHandler, addPost }) => {
-  const handleInputChange = e => {
+export default ({
+  currentTitle,
+  currentContent,
+  updateTitle,
+  updateContent,
+  addPost
+}) => {
+  const handleContentChange = e => {
     const val = e.target.value
-    postChangeHandler(val)
+    updateContent(val)
+  }
+  const handleTitleChange = e => {
+    const val = e.target.value
+    updateTitle(val)
   }
   const handleSubmit = e => {
     e.preventDefault()
-    addPost({ title: currentPost, content: currentPost })
+    addPost({ title: currentTitle, content: currentContent })
   }
   return (
     <div className="add-post">
       <form onSubmit={handleSubmit}>
-        <p>Title and content: </p>
-        <input type="text" value={currentPost} onChange={handleInputChange} />
+        <p>Title:</p>
+        <input
+          type="text"
+          value={currentTitle}
+          onChange={handleTitleChange}
+          required
+        />
+        <p>Content: </p>
+        <input
+          type="text"
+          value={currentContent}
+          onChange={handleContentChange}
+          required
+        />
+        <button type="submit">Submit</button>
       </form>
     </div>
   )

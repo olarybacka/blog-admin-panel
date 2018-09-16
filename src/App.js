@@ -4,12 +4,22 @@ import AddPost from "./components/Post/AddPost"
 import PostList from "./components/Post/PostList"
 class App extends Component {
   render() {
-    const { posts, currentPost, postChangeHandler, handleSubmit, addPost2 } = this.props
+    const {
+      posts,
+      currentContent,
+      currentTitle,
+      updateTitle,
+      updateContent,
+      handleSubmit,
+      addPost2
+    } = this.props
     return (
       <div className="App">
         <AddPost
-          currentPost={currentPost}
-          postChangeHandler={postChangeHandler}
+          currentContent={currentContent}
+          currentTitle={currentTitle}
+          updateTitle={updateTitle}
+          updateContent={updateContent}
           handleSubmit={handleSubmit}
           addPost={addPost2}
         />
