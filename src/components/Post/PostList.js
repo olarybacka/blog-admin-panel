@@ -1,13 +1,22 @@
-import React from "react"
+import React, { Component } from "react"
 import "./styles/post.css"
+import { fetchPosts } from "../../reducers/post"
+import {connect} from 'react-redux'
 
-export default ({ posts }) => (
-  <div className="posts">
-    {posts.map((post, i) => (
-      <Post key={i} {...post} />
-    ))}
-  </div>
-)
+class PostList extends Component {
+  componentDidMount() {
+    fetchPosts()
+  }
+  render() {
+    return (
+      <div className="posts">
+        {this.props.posts.map((post, i) => (
+          <Post key={i} {...post} />
+        ))}
+      </div>
+    )
+  }
+}
 
 const Post = ({ title, content }) => {
   return (
@@ -17,3 +26,7 @@ const Post = ({ title, content }) => {
     </div>
   )
 }
+
+export default connect(
+  (state) => ({posts: state.posts })
+)(PostList)

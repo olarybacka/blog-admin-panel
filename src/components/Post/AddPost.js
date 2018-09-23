@@ -1,11 +1,13 @@
 import React from "react"
 import "./styles/form.css"
+import { connect } from "react-redux"
+import { updateTitle, updateContent, addPost } from "../../reducers/post"
 
-export default ({
-  currentTitle,
+const AddPost = ({
   currentContent,
-  updateTitle,
+  currentTitle,
   updateContent,
+  updateTitle,
   addPost
 }) => {
   const handleContentChange = e => {
@@ -42,3 +44,11 @@ export default ({
     </div>
   )
 }
+
+export default connect(
+  state => ({
+    currentContent: state.currentContent,
+    currentTitle: state.currentTitle
+  }),
+  { updateContent, updateTitle, addPost }
+)(AddPost)
