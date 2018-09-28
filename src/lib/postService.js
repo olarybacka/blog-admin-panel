@@ -1,22 +1,26 @@
+export default {
+  getPosts: () => {
+    return fetch("http://localhost:8080/posts").then(res => res.json())
+  },
 
-export const getPosts = () => {
-  return (
-    fetch('http://localhost:8080/posts')
-    .then(res => res.json())
-  )
-}
-
-
-export const createPost = (post) => {
-  return (
-    fetch('http://localhost:8080/posts', {
-      method: 'POST',
+  createPost: post => {
+    return fetch("http://localhost:8080/posts", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(post)
+    }).then(res => res.json())
+  },
+
+  deletePost: id => {
+    return fetch(`http://localhost:8080/posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
     })
-    .then(res => res.json())
-  )
+  }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./styles/post.css"
-import { fetchPosts } from "../../reducers/post"
+import { fetchPosts, deletePost } from "../../reducers/post"
 import { connect } from "react-redux"
 
 class PostList extends Component {
@@ -10,24 +10,25 @@ class PostList extends Component {
   render() {
     return (
       <div className="posts">
-        {this.props.posts.map((post, i) => (
-          <Post key={i} {...post} />
+        {this.props.posts.map(post => (
+          <Post key={post.id} {...post} deletePost={this.props.deletePost}/>
         ))}
       </div>
     )
   }
 }
 
-const Post = ({ title, content }) => {
+const Post = ({ title, content, id, deletePost }) => {
   return (
     <div className="post">
       <h2>{title}</h2>
       <p>{content}</p>
+      <button onClick={() => deletePost(id)}>X</button>
     </div>
   )
 }
 
 export default connect(
   state => ({ posts: state.posts }),
-  { fetchPosts }
+  { fetchPosts, deletePost }
 )(PostList)

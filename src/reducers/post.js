@@ -1,4 +1,4 @@
-import { getPosts, createPost } from "../lib/postService"
+import api from "../lib/postService"
 
 const initState = {
   posts: [],
@@ -10,20 +10,28 @@ const POST_ADD = "POST_ADD"
 const TITLE_UPDATE = "TITLE_UPDATE"
 const CONTENT_UPDATE = "CONTENT_UPDATE"
 const POSTS_LOAD = "POSTS_LOAD"
+const DELETE_POST = "DELETE_POST"
 
 export const updateTitle = val => ({ type: TITLE_UPDATE, payload: val })
 export const updateContent = val => ({ type: CONTENT_UPDATE, payload: val })
 export const addPost = post => ({ type: POST_ADD, payload: post })
 export const loadPosts = posts => ({ type: POSTS_LOAD, payload: posts })
-export const fetchPosts = () => {
-  return (dispatch) => {
-    getPosts().then(posts => dispatch(loadPosts(posts)) )
+
+export const deletePost = id => {
+  return dispatch => {
+    api.deletePost(id).then(() => dispatch({ type: DELETE_POST, payload: id }))
   }
 }
 
-export const savePost = (post) => {
-  return (dispatch) => {
-    createPost(post).then(res => dispatch(addPost(res)))
+export const fetchPosts = () => {
+  return dispatch => {
+    api.getPosts().then(posts => dispatch(loadPosts(posts)))
+  }
+}
+
+export const savePost = post => {
+  return dispatch => {
+    api.createPost(post).then(res => dispatch(addPost(res)))
   }
 }
 
@@ -42,6 +50,8 @@ export default (state = initState, action) => {
       return { ...state, currentContent: action.payload }
     case POSTS_LOAD:
       return { ...state, posts: action.payload }
+    case DELETE_POST:
+      return { ...state, posts: state.posts.filter(p => p.id !== action.payload) }
     default:
       return state
   }
