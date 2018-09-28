@@ -1,14 +1,14 @@
 import React from "react"
 import "./styles/form.css"
 import { connect } from "react-redux"
-import { updateTitle, updateContent, addPost } from "../../reducers/post"
+import { updateTitle, updateContent, savePost } from "../../reducers/post"
 
 const AddPost = ({
   currentContent,
   currentTitle,
   updateContent,
   updateTitle,
-  addPost
+  savePost
 }) => {
   const handleContentChange = e => {
     const val = e.target.value
@@ -20,7 +20,7 @@ const AddPost = ({
   }
   const handleSubmit = e => {
     e.preventDefault()
-    addPost({ title: currentTitle, content: currentContent })
+    savePost({ title: currentTitle, content: currentContent })
   }
   return (
     <div className="add-post">
@@ -50,5 +50,5 @@ export default connect(
     currentContent: state.currentContent,
     currentTitle: state.currentTitle
   }),
-  { updateContent, updateTitle, addPost }
+  { updateContent, updateTitle, savePost }
 )(AddPost)

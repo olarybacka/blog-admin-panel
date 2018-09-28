@@ -1,4 +1,5 @@
-import { getPosts } from "../lib/postService"
+import { getPosts, createPost } from "../lib/postService"
+
 const initState = {
   posts: [],
   currentTitle: "",
@@ -8,15 +9,21 @@ const initState = {
 const POST_ADD = "POST_ADD"
 const TITLE_UPDATE = "TITLE_UPDATE"
 const CONTENT_UPDATE = "CONTENT_UPDATE"
-const LOAD_POSTS = "LOAD_POSTS"
+const POSTS_LOAD = "POSTS_LOAD"
 
 export const updateTitle = val => ({ type: TITLE_UPDATE, payload: val })
 export const updateContent = val => ({ type: CONTENT_UPDATE, payload: val })
-export const addPost = val => ({ type: POST_ADD, payload: val })
-export const loadPosts = posts => ({ type: LOAD_POSTS, payload: posts })
+export const addPost = post => ({ type: POST_ADD, payload: post })
+export const loadPosts = posts => ({ type: POSTS_LOAD, payload: posts })
 export const fetchPosts = () => {
   return (dispatch) => {
-    getPosts().then(posts => dispatch(loadPosts(posts)))
+    getPosts().then(posts => dispatch(loadPosts(posts)) )
+  }
+}
+
+export const savePost = (post) => {
+  return (dispatch) => {
+    createPost(post).then(res => dispatch(addPost(res)))
   }
 }
 
@@ -33,7 +40,7 @@ export default (state = initState, action) => {
       return { ...state, currentTitle: action.payload }
     case CONTENT_UPDATE:
       return { ...state, currentContent: action.payload }
-    case LOAD_POSTS:
+    case POSTS_LOAD:
       return { ...state, posts: action.payload }
     default:
       return state

@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import "./styles/post.css"
 import { fetchPosts } from "../../reducers/post"
-import {connect} from 'react-redux'
+import { connect } from "react-redux"
 
 class PostList extends Component {
   componentDidMount() {
-    fetchPosts()
+    this.props.fetchPosts()
   }
   render() {
     return (
@@ -28,5 +28,6 @@ const Post = ({ title, content }) => {
 }
 
 export default connect(
-  (state) => ({posts: state.posts })
+  state => ({ posts: state.posts }),
+  { fetchPosts }
 )(PostList)
