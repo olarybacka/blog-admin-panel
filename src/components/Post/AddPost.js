@@ -2,13 +2,15 @@ import React from "react"
 import "./styles/form.css"
 import { connect } from "react-redux"
 import { updateTitle, updateContent, savePost } from "../../reducers/post"
+import { showLoader } from "../../reducers/loader"
 
 const AddPost = ({
   currentContent,
   currentTitle,
   updateContent,
   updateTitle,
-  savePost
+  savePost,
+  showLoader
 }) => {
   const handleContentChange = e => {
     const val = e.target.value
@@ -20,6 +22,7 @@ const AddPost = ({
   }
   const handleSubmit = e => {
     e.preventDefault()
+    showLoader(true)
     savePost({ title: currentTitle, content: currentContent })
   }
   return (
@@ -47,8 +50,8 @@ const AddPost = ({
 
 export default connect(
   state => ({
-    currentContent: state.currentContent,
-    currentTitle: state.currentTitle
+    currentContent: state.post.currentContent,
+    currentTitle: state.post.currentTitle
   }),
-  { updateContent, updateTitle, savePost }
+  { updateContent, updateTitle, savePost, showLoader }
 )(AddPost)

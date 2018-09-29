@@ -29,6 +29,6 @@ const Post = ({ title, content, id, deletePost }) => {
 }
 
 export default connect(
-  state => ({ posts: state.posts }),
+  state => ({ posts: state.post.posts }),
   { fetchPosts, deletePost }
 )(PostList)

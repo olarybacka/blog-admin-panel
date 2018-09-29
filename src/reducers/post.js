@@ -1,4 +1,5 @@
 import api from "../lib/postService"
+import {showLoader} from './loader'
 
 const initState = {
   posts: [],
@@ -6,11 +7,11 @@ const initState = {
   currentContent: ""
 }
 
-const POST_ADD = "POST_ADD"
-const TITLE_UPDATE = "TITLE_UPDATE"
-const CONTENT_UPDATE = "CONTENT_UPDATE"
-const POSTS_LOAD = "POSTS_LOAD"
-const DELETE_POST = "DELETE_POST"
+export const POST_ADD = "POST_ADD"
+export const TITLE_UPDATE = "TITLE_UPDATE"
+export const CONTENT_UPDATE = "CONTENT_UPDATE"
+export const POSTS_LOAD = "POSTS_LOAD"
+export const DELETE_POST = "DELETE_POST"
 
 export const updateTitle = val => ({ type: TITLE_UPDATE, payload: val })
 export const updateContent = val => ({ type: CONTENT_UPDATE, payload: val })
@@ -25,6 +26,7 @@ export const deletePost = id => {
 
 export const fetchPosts = () => {
   return dispatch => {
+    dispatch(showLoader(true))
     api.getPosts().then(posts => dispatch(loadPosts(posts)))
   }
 }
