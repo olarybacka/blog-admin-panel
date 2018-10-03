@@ -5,7 +5,7 @@ import './style.css'
 const Spinner = ({ loading }) =>
   loading ? (
     <div>
-      <div class="lds-ellipsis">
+      <div className="lds-ellipsis">
         <div />
         <div />
         <div />
