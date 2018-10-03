@@ -12,9 +12,11 @@ class App extends Component {
         <Loader />
         <BrowserRouter>
           <div>
-            <Link to="/">Home</Link>
-            <Link to="/posts">Posts</Link>
-            <Link to="/categories">Categories</Link>
+            <div className="links">
+              <Link to="/">Home</Link>
+              <Link to="/posts">Posts</Link>
+              <Link to="/categories">Categories</Link>
+            </div>
 
             <Route exact path="/posts" component={PostsContainer} />
             <Route exact path="/categories" component={CategoryContainer} />
