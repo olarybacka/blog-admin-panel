@@ -13,4 +13,3 @@ export default {
     }).then(res => res.json())
   },
 }
-

@@ -8,7 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension"
 const reducer = combineReducers({
   post: postReducer,
   loading: loadingReducer,
-  categories: categoriesReducer
+  category: categoriesReducer
 })
 
 export default createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))

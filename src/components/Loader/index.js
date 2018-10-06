@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import './style.css'
+import "./style.css"
 
 const Spinner = ({ loading }) =>
   loading ? (
@@ -12,6 +12,8 @@ const Spinner = ({ loading }) =>
         <div />
       </div>
     </div>
-  ) : null
+  ) : (
+    <div className="lds-ellipsis" />
+  )
 
 export default connect(state => ({ loading: state.loading.loading }))(Spinner)

@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 class CategoryList extends Component {
   componentDidMount() {
     this.props.fetchCategories()
-    console.log(this.props)
   }
   render() {
     return (
@@ -19,6 +18,6 @@ class CategoryList extends Component {
 }
 
 export default connect(
-  state => ({ categories: state.categories.categories }),
+  state => ({ categories: state.category.categories }),
   { fetchCategories }
 )(CategoryList)
