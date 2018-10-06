@@ -4,7 +4,12 @@ const AddCategory = () => (
   <div>
     <form>
       <p>Add Category</p>
-      <input type="text"></input>
+      <input
+          type="text"
+          value={currentCategoryName}
+          onChange={handleCategoryNameChange}
+          required
+        />
     </form>
   </div>
 )

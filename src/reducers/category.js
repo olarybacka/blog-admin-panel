@@ -13,6 +13,11 @@ export const fetchCategories = () => {
     api.getCategories().then(categories => dispatch(loadCategories(categories)))
   }
 }
+export const saveCategory = () => {
+  return dispatch => {
+    api.createCategory().then(categories => dispatch(loadCategories(categories)))
+  }
+}
 export default (state = {categories: []}, action) => {
   switch (action.type) {
     case CATEGORY_ADD:

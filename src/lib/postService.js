@@ -1,3 +1,5 @@
+import headers from './headers'
+
 export default {
   getPosts: () => {
     return fetch("http://localhost:8080/posts").then(res => res.json())
@@ -6,10 +8,7 @@ export default {
   createPost: post => {
     return fetch("http://localhost:8080/posts", {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
+      headers: headers,
       body: JSON.stringify(post)
     }).then(res => res.json())
   },
@@ -17,10 +16,7 @@ export default {
   deletePost: id => {
     return fetch(`http://localhost:8080/posts/${id}`, {
       method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+      headers: headers
     })
   }
 }
